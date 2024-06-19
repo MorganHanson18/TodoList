@@ -30,5 +30,3 @@ export class DetailsComponent {
     })
   }
 }
-
-//git commit test
