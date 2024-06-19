@@ -1,0 +1,39 @@
+div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff0fa;
+    border-radius: 20%;
+    padding: 20px;
+    margin:200px;
+    border-color: #269dd4;
+    border-style: double;
+    border-width: 3px;
+    max-width: 300px;
+}
+
+h1, h2, h3, p {
+    text-align: center;
+    padding: 15px;
+    color: #269dd4;
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: medium;
+    font-weight: bold;
+}
+
+p {
+    margin-bottom: 10px;
+}
