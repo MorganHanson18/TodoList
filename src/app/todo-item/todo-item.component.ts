@@ -1,4 +1,4 @@
-import { Component, Input} from '@angular/core';
+import { Component, Input, input} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Todo } from '../todo.interface';
 
@@ -10,5 +10,5 @@ import { Todo } from '../todo.interface';
   styleUrls: ['./todo-item.component.css']
 })
 export class TodoItemComponent {
-  @Input() todo?: Todo;
+  todo = input<Todo>();
 }
