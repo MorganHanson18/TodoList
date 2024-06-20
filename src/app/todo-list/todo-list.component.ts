@@ -3,6 +3,7 @@ import { NgFor, CommonModule } from '@angular/common';
 import {TodosService} from '../todos.service';
 import { Todo } from '../todo.interface';
 import {TodoItemComponent} from '../todo-item/todo-item.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 
 @Component({
@@ -12,7 +13,9 @@ import {TodoItemComponent} from '../todo-item/todo-item.component';
     template: `
       <h1>TODO LIST</h1>
       <ul>
-        <app-todo-item *ngFor='let todo of todos' [todo]="todo"></app-todo-item>
+        @for (todo of todos; track todo) {
+          <app-todo-item [todo]="todo"></app-todo-item>
+        }
       </ul>
     `,
     styleUrls: ['./todo-list.css']
@@ -22,10 +25,8 @@ export class TodoListComponent {
     todos = [] as Todo[];
     TodosService = inject(TodosService);
     constructor() {
-        this.TodosService.getTodos().subscribe((response: Todo[]) => {
-            this.todos = response.map((todo) => {
-                return {userId: todo.userId, id: todo.id, title: todo.title, completed: todo.completed}
-            })
+        this.TodosService.getTodos().pipe(takeUntilDestroyed()).subscribe((response: Todo[]) => {
+          this.todos = response
         })
     }
 }
