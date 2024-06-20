@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router'
 import{Todo} from '../todo.interface'
 import {TodosService} from '../todos.service'
 import { RouterModule } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-details',
@@ -14,19 +15,13 @@ import { RouterModule } from '@angular/router';
 
 export class DetailsComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
-  todoTitle?: string
-  todoUser?: number
-  todoId?: number
-  todoCompleted?: boolean;
+  todo?: Todo;
   todosService = inject(TodosService);
 
   constructor() {
     //this.habitId = (this.route.snapshot.params['id']);
-    this.todosService.getTodo(this.route.snapshot.params['id']).subscribe((response: Todo) => {
-      this.todoTitle = response.title
-      this.todoUser = response.userId
-      this.todoId = response.id
-      this.todoCompleted = response.completed
+    this.todosService.getTodo(this.route.snapshot.params['id']).pipe(takeUntilDestroyed()).subscribe((response: Todo) => {
+      this.todo = response
     })
   }
 }

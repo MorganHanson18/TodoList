@@ -1,7 +1,7 @@
 <div>
-    <h1>{{todoId}}.</h1>
-    <h2>{{todoTitle}}</h2>
-    <h3>completed: {{todoCompleted}}</h3>
-    <p>User: {{todoUser}}</p>
+    <h1>{{todo?.id}}.</h1>
+    <h2>{{todo?.title}}</h2>
+    <h3>completed: {{todo?.completed}}</h3>
+    <p>User: {{todo?.userId}}</p>
     <a [routerLink]="['']">back</a>
 </div>

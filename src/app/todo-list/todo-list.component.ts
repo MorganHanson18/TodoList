@@ -13,7 +13,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     template: `
       <h1>TODO LIST</h1>
       <ul>
-        @for (todo of todos; track todo) {
+        @for (todo of todos; track todo.id) {
           <app-todo-item [todo]="todo"></app-todo-item>
         }
       </ul>
