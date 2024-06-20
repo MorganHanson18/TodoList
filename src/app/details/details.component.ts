@@ -19,7 +19,7 @@ export class DetailsComponent {
   todosService = inject(TodosService);
 
   constructor() {
-    //this.habitId = (this.route.snapshot.params['id']);
+    //added takeUntilDestroyer and simplified the output
     this.todosService.getTodo(this.route.snapshot.params['id']).pipe(takeUntilDestroyed()).subscribe((response: Todo) => {
       this.todo = response
     })
