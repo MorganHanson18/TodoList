@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { NgFor, CommonModule } from '@angular/common';
 import {TodosService} from '../todos.service';
 import { Todo } from '../todo.interface';
@@ -13,7 +13,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     template: `
       <h1>TODO LIST</h1>
       <ul>
-        @for (todo of todos; track todo.id) {
+        @for (todo of todos(); track todo.id) {
           <app-todo-item [todo]="todo"></app-todo-item>
         }
       </ul>
@@ -22,11 +22,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   })
 
 export class TodoListComponent {
-    todos = [] as Todo[];
+    todos = signal<Todo[]>([]);
     TodosService = inject(TodosService);
     constructor() {
         this.TodosService.getTodos().pipe(takeUntilDestroyed()).subscribe((response: Todo[]) => {
-          this.todos = response
+          this.todos.set(response)
         })
     }
 }
