@@ -1,4 +1,4 @@
-import { Component, inject} from '@angular/core';
+import { Component, inject, signal} from '@angular/core';
 import {ActivatedRoute} from '@angular/router'
 import{Todo} from '../todo.interface'
 import {TodosService} from '../todos.service'
@@ -15,13 +15,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export class DetailsComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
-  todo?: Todo;
+  todo = signal<Todo|null>(null);
   todosService = inject(TodosService);
 
   constructor() {
-    //this.habitId = (this.route.snapshot.params['id']);
     this.todosService.getTodo(this.route.snapshot.params['id']).pipe(takeUntilDestroyed()).subscribe((response: Todo) => {
-      this.todo = response
+      this.todo.set(response)
     })
   }
 }
