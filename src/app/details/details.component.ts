@@ -30,13 +30,15 @@ export class DetailsComponent {
     })
   }
 
-  submitApplication() {
+  updateTodoTitle() {
     const updatedTitle = this.applyForm.value.title ?? '';
-    let current = this.todo()
+    const current = this.todo();
+
     if (current) {
-      current.title = updatedTitle;
-      this.todo.set(current)
-      this.todosService.submitApplication(updatedTitle, current.id);
+      this.todosService.updateTodoTitle(current, updatedTitle).subscribe((response: Todo) => {
+        this.todo.set(response)
+      })
     }
   }
+
 }

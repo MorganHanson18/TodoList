@@ -16,10 +16,13 @@ export class TodosService {
     return this.http.get<Todo>('https://jsonplaceholder.typicode.com/todos' + '/' + id)
   }
 
-  submitApplication(title: string, id: number) {
-    console.log(
-      `Title change received: title: ${title}`,
-    );
+  updateTodoTitle(myTodo: Todo, newTitle: string) {
+    return this.http.put<Todo>('https://jsonplaceholder.typicode.com/todos' + '/' + myTodo.id, {
+      userId: myTodo.userId,
+      id: myTodo.id,
+      title: newTitle,
+      completed: myTodo.completed
+    });
   }
 
 }
