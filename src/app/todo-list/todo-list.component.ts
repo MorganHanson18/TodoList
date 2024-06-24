@@ -35,10 +35,4 @@ export class TodoListComponent {
     uncompleted= computed(() => {
       return this.todos().filter(todo => !todo.completed).length;
     });
-
-    constructor() {
-        this.TodosService.getTodos().pipe(takeUntilDestroyed()).subscribe((response: Todo[]) => {
-          this.todos.set(response)
-        })
-    }
 }
