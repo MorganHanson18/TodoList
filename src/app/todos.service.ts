@@ -1,6 +1,7 @@
 import {HttpClient} from '@angular/common/http'
 import { Injectable, inject, signal } from '@angular/core';
 import { Todo } from './todo.interface';
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,14 @@ export class TodosService {
       id: myTodo.id,
       title: newTitle,
       completed: myTodo.completed
-    });
+    }).pipe(
+      tap(() => {
+        this.todos.update((todos) => {
+          const todosWithoutUpdated = todos.filter(t => t.id !== myTodo.id);
+          return [...todosWithoutUpdated, {...myTodo, title: newTitle}]
+        })
+      })
+    )
   }
 
 }

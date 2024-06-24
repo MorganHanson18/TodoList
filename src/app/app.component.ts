@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { TodosService } from './todos.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Todo } from './todo.interface';
 
 @Component({
   selector: 'app-root',
@@ -16,4 +19,11 @@ import { RouterModule } from '@angular/router';
 })
 export class AppComponent {
   title = 'todo';
+  private todosService = inject(TodosService);
+
+  constructor() {
+    this.todosService.getTodos().pipe(takeUntilDestroyed()).subscribe((response: Todo[]) => {
+      this.todosService.todos.set(response)
+    })
+}
 }

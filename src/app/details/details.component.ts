@@ -25,9 +25,11 @@ export class DetailsComponent {
   });
 
   constructor() {
-    this.todosService.getTodo(this.route.snapshot.params['id']).pipe(takeUntilDestroyed()).subscribe((response: Todo) => {
-      this.todo.set(response)
-    })
+    this.todosService.getTodo(this.route.snapshot.params['id'])
+      .pipe(takeUntilDestroyed())
+      .subscribe((response: Todo) => {
+        this.todo.set(response);
+      });
   }
 
   updateTodoTitle() {
@@ -36,9 +38,8 @@ export class DetailsComponent {
 
     if (current) {
       this.todosService.updateTodoTitle(current, updatedTitle).subscribe((response: Todo) => {
-        this.todo.set(response)
-      })
+        this.todo.set(response);
+      });
     }
   }
-
 }
