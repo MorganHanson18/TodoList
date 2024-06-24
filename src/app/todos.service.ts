@@ -1,5 +1,5 @@
 import {HttpClient} from '@angular/common/http'
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { Todo } from './todo.interface';
 
 @Injectable({
@@ -7,6 +7,7 @@ import { Todo } from './todo.interface';
 })
 export class TodosService {
   http = inject(HttpClient)
+  todos = signal<Todo[]>([]);
 
   getTodos() {
     return this.http.get<Todo[]>('https://jsonplaceholder.typicode.com/todos')
