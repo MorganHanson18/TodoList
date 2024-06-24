@@ -28,7 +28,23 @@ export class TodosService {
       tap(() => {
         this.todos.update((todos) => {
           const todosWithoutUpdated = todos.filter(t => t.id !== myTodo.id);
-          return [...todosWithoutUpdated, {...myTodo, title: newTitle}]
+          return [{...myTodo, title: newTitle}, ...todosWithoutUpdated]
+        })
+      })
+    )
+  }
+
+  updateTodoComplete(myTodo: Todo, completion:  boolean) {
+    return this.http.put<Todo>('https://jsonplaceholder.typicode.com/todos' + '/' + myTodo.id, {
+      userId: myTodo.userId,
+      id: myTodo.id,
+      title: myTodo.title,
+      completed: completion
+    }).pipe(
+      tap(() => {
+        this.todos.update((todos) => {
+          const todosWithoutUpdated = todos.filter(t => t.id !== myTodo.id);
+          return [{...myTodo, complete:completion}, ...todosWithoutUpdated]
         })
       })
     )

@@ -1,6 +1,7 @@
-import { Component, Input, input} from '@angular/core';
+import { Component, Input, inject, input, signal} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Todo } from '../todo.interface';
+import { TodosService } from '../todos.service';
 
 @Component({
   selector: 'app-todo-item',
@@ -10,5 +11,18 @@ import { Todo } from '../todo.interface';
   styleUrls: ['./todo-item.component.css']
 })
 export class TodoItemComponent {
-  todo = input<Todo>();
+  todo = signal<Todo|null>(null);
+  todosService = inject(TodosService);
+
+  constructor() {}
+  onCompletionChange(event: Event, ) {
+    const checked = (event.target as HTMLInputElement).checked;
+    const current = this.todo();
+    if (current) {
+      this.todosService.updateTodoComplete(current, checked).subscribe((response: Todo) => {
+        this.todo.set(response);
+      });
+    }
+  }
+
 }
