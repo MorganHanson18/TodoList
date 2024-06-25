@@ -27,6 +27,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class TodoListComponent {
     TodosService = inject(TodosService);
     todos = this.TodosService.todos;
+    loading = signal<boolean>(false);
 
     completed = computed(() => {
       return this.todos().filter(todo => todo.completed).length;

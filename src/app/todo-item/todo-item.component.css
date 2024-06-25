@@ -1,4 +1,7 @@
-:host {
+
+.box {
+    display: flex;
+    width: 500px;
     display: flex;
     align-items: center;
     background-color:#fff0fa;
@@ -7,12 +10,6 @@
     border: #d14196;
     border-width: 2px;
     border-style: double;
-}
-
-.box {
-    display: flex;
-    align-items: center;
-    width: 500px;
 }
 
 .left {
@@ -40,3 +37,29 @@ p {
 label {
     color: #269dd4;
 }
+
+.loader {
+    animation: loader 1.25s infinite;
+    background-color: #8c2ac1;
+    width: 5px;
+    height: 5px;
+    left:43%;
+    top:40%;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0%;
+    border-color: #8c2ac1;
+  }
+  
+  @keyframes loader {
+    0% {
+      rotate: 0deg;
+    }
+    100% {
+      border-radius: 50%;
+      rotate: 180deg;
+    }
+  }
+
+  
