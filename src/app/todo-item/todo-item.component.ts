@@ -11,7 +11,7 @@ import { TodosService } from '../todos.service';
   styleUrls: ['./todo-item.component.css']
 })
 export class TodoItemComponent {
-  todo = signal<Todo|null>(null);
+  todo = input.required<Todo>()  
   todosService = inject(TodosService);
 
   constructor() {}
@@ -19,9 +19,7 @@ export class TodoItemComponent {
     const checked = (event.target as HTMLInputElement).checked;
     const current = this.todo();
     if (current) {
-      this.todosService.updateTodoComplete(current, checked).subscribe((response: Todo) => {
-        this.todo.set(response);
-      });
+      this.todosService.updateTodoComplete(current, checked).subscribe();
     }
   }
 

@@ -15,7 +15,7 @@ export class TodosService {
   }
 
   getTodo(id: string) {
-    return this.http.get<Todo>('https://jsonplaceholder.typicode.com/todos' + '/' + id)
+    return this.todos().find(t => t.id === Number(id))
   }
 
   updateTodoTitle(myTodo: Todo, newTitle: string) {
@@ -44,7 +44,7 @@ export class TodosService {
       tap(() => {
         this.todos.update((todos) => {
           const todosWithoutUpdated = todos.filter(t => t.id !== myTodo.id);
-          return [{...myTodo, complete:completion}, ...todosWithoutUpdated]
+          return [{...myTodo, completed:completion}, ...todosWithoutUpdated]
         })
       })
     )
