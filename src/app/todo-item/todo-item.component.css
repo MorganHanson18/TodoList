@@ -7,10 +7,26 @@
     background-color:#fff0fa;
     margin: 15px;
     padding: 15px;
+    margin-left: 15;
     border: #d14196;
     border-width: 2px;
     border-style: double;
 }
+
+.boxes {
+    display: flex;
+    width: 500px;
+    display: flex;
+    align-items: center;
+    background-color:#fff0fa;
+    margin: 15px;
+    padding: 15px;
+    margin-right: 15;
+    border: #d14196;
+    border-width: 2px;
+    border-style: double;
+}
+
 
 .left {
     color: #d14196;
