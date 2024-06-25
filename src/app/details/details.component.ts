@@ -28,12 +28,16 @@ export class DetailsComponent {
     this.todo.set(this.todosService.getTodo(this.route.snapshot.params['id'])!)
   }
 
-  updateTodoTitle() {
+  updateTodo() {
     const updatedTitle = this.applyForm.value.title ?? '';
     const current = this.todo();
 
     if (current) {
-      this.todosService.updateTodoTitle(current, updatedTitle).subscribe();
+      this.todosService.updateTodo(current, { title: updatedTitle }).subscribe({
+        next: () => {
+          this.todo.set({ ...current, title: updatedTitle });
+        }
+      });
     }
   }
 

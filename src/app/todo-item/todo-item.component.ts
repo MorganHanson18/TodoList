@@ -19,7 +19,7 @@ export class TodoItemComponent {
     const checked = (event.target as HTMLInputElement).checked;
     const current = this.todo();
     if (current) {
-      this.todosService.updateTodoComplete(current, checked).subscribe();
+      this.todosService.updateTodo(current, {completed: checked}).subscribe();
     }
   }
 

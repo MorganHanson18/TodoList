@@ -18,36 +18,19 @@ export class TodosService {
     return this.todos().find(t => t.id === Number(id))
   }
 
-  updateTodoTitle(myTodo: Todo, newTitle: string) {
-    return this.http.put<Todo>('https://jsonplaceholder.typicode.com/todos' + '/' + myTodo.id, {
-      userId: myTodo.userId,
-      id: myTodo.id,
-      title: newTitle,
-      completed: myTodo.completed
-    }).pipe(
+  updateTodo(myTodo: Todo, payload: Partial<Todo>) {
+    const updatedTodo = {...myTodo, ...payload};
+    return this.http.put<Todo>('https://jsonplaceholder.typicode.com/todos' + '/' + myTodo.id, updatedTodo)
+    .pipe(
       tap(() => {
         this.todos.update((todos) => {
-          const todosWithoutUpdated = todos.filter(t => t.id !== myTodo.id);
-          return [{...myTodo, title: newTitle}, ...todosWithoutUpdated]
+          return todos.map((todo) => {
+            return todo.id !== myTodo.id ? todo : updatedTodo
+          })
         })
       })
     )
-  }
-
-  updateTodoComplete(myTodo: Todo, completion:  boolean) {
-    return this.http.put<Todo>('https://jsonplaceholder.typicode.com/todos' + '/' + myTodo.id, {
-      userId: myTodo.userId,
-      id: myTodo.id,
-      title: myTodo.title,
-      completed: completion
-    }).pipe(
-      tap(() => {
-        this.todos.update((todos) => {
-          const todosWithoutUpdated = todos.filter(t => t.id !== myTodo.id);
-          return [{...myTodo, completed:completion}, ...todosWithoutUpdated]
-        })
-      })
-    )
+  
   }
 
   removeTodo(myTodo: Todo) {
