@@ -36,4 +36,12 @@ export class DetailsComponent {
       this.todosService.updateTodoTitle(current, updatedTitle).subscribe();
     }
   }
+
+removeTodo() {
+  const current = this.todo();
+  if (current) {
+    this.todosService.removeTodo(current)
+  }
+}
+
 }
