@@ -13,11 +13,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     template: `
       <h1>TODO LIST</h1>
       <p>Total Todos: {{todos().length}}</p>
-      <p>Completed Todos: {{completed().length}}</p>
-      <p>Uncompleted Todos: {{uncompleted().length}}</p>
       <div class="list">
         <div>
-          <h2>Uncompleted:</h2>
+          <h2>Uncompleted: {{uncompleted().length}}</h2>
           <ul class="todo undone">
             @for (todo of uncompleted(); track todo.id) {
               <app-todo-item [todo]="todo"></app-todo-item>
@@ -25,7 +23,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
           </ul>
         </div>
         <div>
-          <h2>Completed:</h2>
+          <h2>Completed: {{completed().length}}</h2>
           <ul class="todo done">
             @for (todo of completed(); track todo.id) {
               <app-todo-item [todo]="todo"></app-todo-item>
