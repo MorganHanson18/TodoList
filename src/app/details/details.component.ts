@@ -1,4 +1,4 @@
-import { Component, inject, signal} from '@angular/core';
+import { Component, inject, input, signal} from '@angular/core';
 import {ActivatedRoute} from '@angular/router'
 import{Todo} from '../todo.interface'
 import {TodosService} from '../todos.service'
@@ -25,21 +25,27 @@ export class DetailsComponent {
   });
 
   constructor() {
-    this.todosService.getTodo(this.route.snapshot.params['id'])
-      .pipe(takeUntilDestroyed())
-      .subscribe((response: Todo) => {
-        this.todo.set(response);
-      });
+    this.todo.set(this.todosService.getTodo(this.route.snapshot.params['id'])!)
   }
 
-  updateTodoTitle() {
+  updateTodo() {
     const updatedTitle = this.applyForm.value.title ?? '';
     const current = this.todo();
 
     if (current) {
-      this.todosService.updateTodoTitle(current, updatedTitle).subscribe((response: Todo) => {
-        this.todo.set(response);
+      this.todosService.updateTodo(current, { title: updatedTitle }).subscribe({
+        next: () => {
+          this.todo.set({ ...current, title: updatedTitle });
+        }
       });
     }
   }
+
+removeTodo() {
+  const current = this.todo();
+  if (current) {
+    this.todosService.removeTodo(current)
+  }
+}
+
 }

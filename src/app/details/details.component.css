@@ -58,7 +58,7 @@ input {
     width: 150px;
 }
 
-button {
+.primary {
     padding: 10px 20px;
     background-color: #269dd4;
     color: white;
@@ -66,6 +66,20 @@ button {
     border-radius: 5px;
 }
 
-button:hover {
+.primary:hover {
+    background-color: white;
+    color: #269dd4;
+}
+
+.secondary {
     background-color: #d14196;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+.secondary:hover {
+    background-color: white;
+    color: #d14196;
 }

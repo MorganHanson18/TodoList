@@ -7,9 +7,13 @@
 </div>
 <div>
     <h3 class="section-heading">Want to change the todo name?</h3>
-    <form [formGroup]="applyForm" (submit)="updateTodoTitle()">
+    <form [formGroup]="applyForm" (submit)="updateTodo()">
       <label for="title">New Title: </label>
       <input id="title" type="text" formControlName="title" />
       <button type="submit" class="primary">Update</button>
     </form>
+
 </div>
+<form [formGroup]="applyForm" (submit)="removeTodo()">
+    <button type="submit" class="secondary">Remove todo</button>
+</form>

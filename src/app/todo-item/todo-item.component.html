@@ -1,7 +1,9 @@
 <div class="box">
-    <div class="left">{{todo()?.id}}.</div>
+    <div class="left">{{todo().id}}.</div>
     <div class="right">
-        <p>{{todo()?.title}}</p>
-        <a [routerLink]="['/details', todo()?.id]">details</a>
+        <p>{{todo().title}}</p>
+        <a [routerLink]="['/details', todo().id]">details</a>
     </div>
+    <label for="task">completed: </label><br>
+    <input type="checkbox" id="task" name="task" [checked]="todo().completed" (change)="onCompletionChange($event)">
 </div>

@@ -15,23 +15,26 @@ export class TodosService {
   }
 
   getTodo(id: string) {
-    return this.http.get<Todo>('https://jsonplaceholder.typicode.com/todos' + '/' + id)
+    return this.todos().find(t => t.id === Number(id))
   }
 
-  updateTodoTitle(myTodo: Todo, newTitle: string) {
-    return this.http.put<Todo>('https://jsonplaceholder.typicode.com/todos' + '/' + myTodo.id, {
-      userId: myTodo.userId,
-      id: myTodo.id,
-      title: newTitle,
-      completed: myTodo.completed
-    }).pipe(
+  updateTodo(myTodo: Todo, payload: Partial<Todo>) {
+    const updatedTodo = {...myTodo, ...payload};
+    return this.http.put<Todo>('https://jsonplaceholder.typicode.com/todos' + '/' + myTodo.id, updatedTodo)
+    .pipe(
       tap(() => {
         this.todos.update((todos) => {
-          const todosWithoutUpdated = todos.filter(t => t.id !== myTodo.id);
-          return [...todosWithoutUpdated, {...myTodo, title: newTitle}]
+          return todos.map((todo) => {
+            return todo.id !== myTodo.id ? todo : updatedTodo
+          })
         })
       })
     )
+  
+  }
+
+  removeTodo(myTodo: Todo) {
+    return
   }
 
 }
