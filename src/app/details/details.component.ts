@@ -17,6 +17,7 @@ import { CommonModule } from '@angular/common';
 
 export class DetailsComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
+
   todo = signal<Todo|null>(null);
   todosService = inject(TodosService);
 
@@ -41,11 +42,14 @@ export class DetailsComponent {
     }
   }
 
-removeTodo() {
-  const current = this.todo();
-  if (current) {
-    this.todosService.removeTodo(current)
+  removeTodo() {
+    const current = this.todo();
+    if (current) {
+      this.todosService.removeTodo(current).subscribe({
+        next: () => {
+          history.back()
+        }
+      })
+    }
   }
-}
-
 }

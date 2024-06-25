@@ -34,7 +34,14 @@ export class TodosService {
   }
 
   removeTodo(myTodo: Todo) {
-    return
+    return this.http.delete('https://jsonplaceholder.typicode.com/todos' + '/' + myTodo.id)
+      .pipe(
+        tap(() => {
+          this.todos.update((todos) => {
+            return todos.filter(todo => todo.id !== myTodo.id);
+          });
+        })
+      );
   }
 
 }
