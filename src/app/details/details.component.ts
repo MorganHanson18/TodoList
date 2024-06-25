@@ -1,5 +1,5 @@
 import { Component, inject, input, signal} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router'
+import {ActivatedRoute} from '@angular/router'
 import{Todo} from '../todo.interface'
 import {TodosService} from '../todos.service'
 import { RouterModule } from '@angular/router';
@@ -17,7 +17,6 @@ import { CommonModule } from '@angular/common';
 
 export class DetailsComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
-  router: Router = inject(Router);
 
   todo = signal<Todo|null>(null);
   todosService = inject(TodosService);
