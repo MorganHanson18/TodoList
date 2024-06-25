@@ -9,6 +9,7 @@ import { tap } from 'rxjs';
 export class TodosService {
   http = inject(HttpClient)
   todos = signal<Todo[]>([]);
+  loading = signal<boolean>(false)
 
   getTodos() {
     return this.http.get<Todo[]>('https://jsonplaceholder.typicode.com/todos')
@@ -19,12 +20,14 @@ export class TodosService {
   }
 
   updateTodo(myTodo: Todo, payload: Partial<Todo>) {
+    this.loading.set(true);
     const updatedTodo = {...myTodo, ...payload};
     return this.http.put<Todo>('https://jsonplaceholder.typicode.com/todos' + '/' + myTodo.id, updatedTodo)
     .pipe(
       tap(() => {
         this.todos.update((todos) => {
           return todos.map((todo) => {
+            this.loading.set(false);
             return todo.id !== myTodo.id ? todo : updatedTodo
           })
         })
@@ -34,10 +37,12 @@ export class TodosService {
   }
 
   removeTodo(myTodo: Todo) {
+    this.loading.set(true);
     return this.http.delete('https://jsonplaceholder.typicode.com/todos' + '/' + myTodo.id)
       .pipe(
         tap(() => {
           this.todos.update((todos) => {
+            this.loading.set(false);
             return todos.filter(todo => todo.id !== myTodo.id);
           });
         })

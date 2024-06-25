@@ -17,9 +17,9 @@ import { CommonModule } from '@angular/common';
 
 export class DetailsComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
-
   todo = signal<Todo|null>(null);
   todosService = inject(TodosService);
+  loading = this.todosService.loading;
 
   applyForm = new FormGroup({
     title: new FormControl(''),

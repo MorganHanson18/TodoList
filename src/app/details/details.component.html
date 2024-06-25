@@ -17,3 +17,4 @@
 <form [formGroup]="applyForm" (submit)="removeTodo()">
     <button type="submit" class="secondary">Remove todo</button>
 </form>
+<div class="loader" [style.display]="loading() ? 'block' : 'none'"></div>

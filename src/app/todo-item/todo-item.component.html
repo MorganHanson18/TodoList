@@ -7,3 +7,5 @@
     <label for="task">completed: </label><br>
     <input type="checkbox" id="task" name="task" [checked]="todo().completed" (change)="onCompletionChange($event)">
 </div>
+<div class="loader" [style.display]="loading() ? 'absolute' : 'none'"></div>
+

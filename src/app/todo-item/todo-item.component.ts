@@ -13,12 +13,15 @@ import { TodosService } from '../todos.service';
 export class TodoItemComponent {
   todo = input.required<Todo>()  
   todosService = inject(TodosService);
+  loading = this.todosService.loading;
 
   constructor() {}
   onCompletionChange(event: Event, ) {
+    this.loading.set(true)
     const checked = (event.target as HTMLInputElement).checked;
     const current = this.todo();
     if (current) {
+      this.loading.set(false)
       this.todosService.updateTodo(current, {completed: checked}).subscribe();
     }
   }

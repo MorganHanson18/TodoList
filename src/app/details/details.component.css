@@ -83,3 +83,27 @@ input {
     background-color: white;
     color: #d14196;
 }
+
+.loader {
+    animation: loader 1.25s infinite;
+    background-color: #8c2ac1;
+    width: 5px;
+    height: 5px;
+    left:43%;
+    top:40%;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0%;
+    border-color: #8c2ac1;
+  }
+  
+  @keyframes loader {
+    0% {
+      rotate: 0deg;
+    }
+    100% {
+      border-radius: 50%;
+      rotate: 180deg;
+    }
+  }
