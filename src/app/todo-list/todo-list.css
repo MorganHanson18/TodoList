@@ -20,6 +20,13 @@ p {
     color: #269dd4;
 }
 
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
 .list {
     display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -34,4 +41,34 @@ p {
 .done, .undone {
     max-height: 100vh;
 	overflow-y: auto;
+}
+
+a {
+    padding: 10px 20px;
+    margin-top: 15px;
+    background-color: #269dd4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+a:hover {
+    color: #269dd4;
+    background-color: white;
+}
+
+a:link { 
+    text-decoration: none; 
+} 
+
+a:visited { 
+    text-decoration: none; 
+} 
+
+a:hover { 
+    text-decoration: none; 
+} 
+
+a:active { 
+    text-decoration: none; 
 }

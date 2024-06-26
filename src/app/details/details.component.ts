@@ -45,11 +45,7 @@ export class DetailsComponent {
   removeTodo() {
     const current = this.todo();
     if (current) {
-      this.todosService.removeTodo(current).subscribe({
-        next: () => {
-          history.back()
-        }
-      })
+      this.todosService.removeTodo(current).subscribe(() => history.back());
     }
   }
 }

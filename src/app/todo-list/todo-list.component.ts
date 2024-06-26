@@ -4,35 +4,16 @@ import {TodosService} from '../todos.service';
 import { Todo } from '../todo.interface';
 import {TodoItemComponent} from '../todo-item/todo-item.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import { RouterModule } from '@angular/router';
+
 
 
 @Component({
     selector: 'app-todo-list',
     standalone: true,
-    imports: [TodoItemComponent, NgFor, CommonModule],
-    template: `
-      <h1>TODO LIST</h1>
-      <p>Total Todos: {{todos().length}}</p>
-      <div class="list">
-        <div>
-          <h2>Uncompleted: {{uncompleted().length}}</h2>
-          <ul class="todo undone">
-            @for (todo of uncompleted(); track todo.id) {
-              <app-todo-item [todo]="todo"></app-todo-item>
-            }
-          </ul>
-        </div>
-        <div>
-          <h2>Completed: {{completed().length}}</h2>
-          <ul class="todo done">
-            @for (todo of completed(); track todo.id) {
-              <app-todo-item [todo]="todo"></app-todo-item>
-            }
-          </ul>
-        </div>
-      </div>
-
-    `,
+    imports: [TodoItemComponent, NgFor, CommonModule, ReactiveFormsModule, RouterModule],
+    templateUrl: './todo-list.html',
     styleUrls: ['./todo-list.css']
   })
 
@@ -48,4 +29,5 @@ export class TodoListComponent {
     uncompleted= computed(() => {
       return this.todos().filter(todo => !todo.completed);
     });
-}
+  
+  }
