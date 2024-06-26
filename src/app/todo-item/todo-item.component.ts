@@ -16,7 +16,7 @@ export class TodoItemComponent {
   loading = this.todosService.loading;
 
   constructor() {}
-  onCompletionChange(event: Event, ) {
+  onCompletionChange(event: Event) {
     this.loading.set(true)
     const checked = (event.target as HTMLInputElement).checked;
     const current = this.todo();
