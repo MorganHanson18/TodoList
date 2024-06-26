@@ -1,4 +1,4 @@
-import { Component, inject, input, signal} from '@angular/core';
+import { Component, computed, inject, input, signal} from '@angular/core';
 import {ActivatedRoute} from '@angular/router'
 import{Todo} from '../todo.interface'
 import {TodosService} from '../todos.service'

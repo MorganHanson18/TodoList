@@ -22,14 +22,15 @@ export class TodosService {
   updateTodo(myTodo: Todo, payload: Partial<Todo>) {
     this.loading.set(true);
     const updatedTodo = {...myTodo, ...payload};
-    
-    return this.http.put<Todo>('https://jsonplaceholder.typicode.com/todos' + '/' + myTodo.id, updatedTodo)
+    const forceIdToFixJsonplaceholderError = updatedTodo.id;
+    const realMyTodoId = myTodo.id;
+    return this.http.put<Todo>('https://jsonplaceholder.typicode.com/todos' + '/' + forceIdToFixJsonplaceholderError, updatedTodo)
     .pipe(
       tap(() => {
         this.todos.update((todos) => {
           return todos.map((todo) => {
             this.loading.set(false);
-            return todo.id !== myTodo.id ? todo : updatedTodo
+            return todo.id !== realMyTodoId ? todo : {...updatedTodo, id: realMyTodoId}
           })
         })
       })
