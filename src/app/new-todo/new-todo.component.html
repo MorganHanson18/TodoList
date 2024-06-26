@@ -1,0 +1,13 @@
+<div>
+
+    <h2>New Todo:</h2>
+    <form [formGroup]="applyForm" (submit)="newTodo()">
+        <label for="title">New Title: </label>
+        <input id="title" type="text" formControlName="title" />
+        <label for="user">User id: </label>
+        <input id="user" type="text" formControlName="user" />
+        <button type="submit" class="primary">Add New Todo</button>
+    </form>
+    <a [routerLink]="['']">back</a>
+
+</div>
