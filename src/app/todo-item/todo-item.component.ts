@@ -17,12 +17,10 @@ export class TodoItemComponent {
 
   constructor() {}
   onCompletionChange(event: Event) {
-    this.loading.set(true)
     const checked = (event.target as HTMLInputElement).checked;
     const current = this.todo();
     if (current) {
-      this.loading.set(false)
-      this.todosService.updateTodo(current, {completed: checked}).subscribe();
+      this.todosService.updateTodo(current, {id: 10, completed: checked}).subscribe();
     }
   }
 
